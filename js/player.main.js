@@ -5,12 +5,14 @@ class Video{
 	autoplay = false;
 	loop = false;
 	hideMouseAfter = 5000; //Time in ms
+
 	videoDiv;
 	videoPlayer;
 	lastMouseKnownPos = Date.now();
 	videoControl = $("#videoControl");
 	fullscreen_button = $("#full_screen");
 	play_pause_button = $("#play_pause");
+	time_controll = $("#timeControll");
 
 	constructor(videoID){
 		this.videoID = videoID;
@@ -83,13 +85,32 @@ class Video{
 		});
 	}
 
+	timeControll(self)
+	{
+		this.time_controll.click(function()
+		{
+			var currentValue = self.time_controll.val();
+			var videoCurrent = ( self.videoPlayer.duration * (currentValue / self.time_controll.attr('max')) );
+			self.videoPlayer.currentTime = videoCurrent;
+		});
+	}
+
+	sliderUpdater(self)
+	{
+		this.videoPlayer.addEventListener('timeupdate', (event) => {
+			var currentState = self.videoPlayer.currentTime /  self.videoPlayer.duration * self.time_controll.attr('max');
+			self.time_controll.val( currentState );
+		});
+	}
+
 	init(){
 
 		var self = this;
-		
+
 		this.hoverControl(this);
 		this.startStop(this);
 		this.fullscreenMode(this);
+		this.timeControll(this);
 		var mouseHidingInterval = setInterval(this.mouseHiddingControl, 1000, this);
 
 		this.videoPlayer.addEventListener('waiting', (event) => {
@@ -101,6 +122,8 @@ class Video{
 			$(".lds-dual-ring").fadeOut(100);
 			self.videoControl.fadeOut(500);
 		});
+
+		this.sliderUpdater(this);
 
 	}
 
