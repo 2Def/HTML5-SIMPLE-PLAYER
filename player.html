@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+
+<html lang="EN">
+<head>
+	<meta charset="UTF-8">
+	<title>Simple HTML5 & JS VIDEO PLAYER</title>
+	<meta name="description" content="HTML5 VIDEO PLAYER">
+	<meta name="author" content="Aradiusz Haduch">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/player.css">
+	<link rel="stylesheet" type="text/css" href="css/demo.css">
+</head>
+<body>
+
+
+<div style="width: 720px; height: 480px;">
+	<div id="videoPlayer">
+		<video>
+			<source src="small.mp4" type="video/mp4">
+		</video>
+		<div class="lds-dual-ring"></div> <!-- LOADING SCREEN --->
+		<div id="videoControl">
+			<h3>A Man With Skull Makeup Climbs Down the Ladder</h3>
+			<i id="play_pause" class="fa fa-play" style="font-size:24px"></i>
+			<i id="full_screen" class="fa fa-arrows-alt"></i>
+		</div>
+	</div>
+</div>
+	<script src="js/player.main.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+		let myVideo = new Video("videoPlayer"); //You can change basic options like autoPlay or looping video 
+		//Set Your settings then init player by myVideo.init(); or just init let defaut settings
+		myVideo.init();
+
+		});
+	</script>
+</body>
+</html>
